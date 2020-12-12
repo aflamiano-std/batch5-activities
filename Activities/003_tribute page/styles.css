@@ -1,0 +1,161 @@
+/* Master styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+  background-image: url("images/dark-honeycomb.png");
+  position: relative;
+}
+
+#main {
+  background-color: white;
+  width: 10 0%;
+  margin: 0;
+  padding: 0;
+  max-width: 1920px;
+  /* padding: 0 5% 2% 5%; */
+}
+
+#img-div {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  /* background-color: lightcoral; */
+  margin: 0;
+}
+
+#image {
+  display: block;
+  width: inherit;
+  max-height: 100vh;
+  object-fit: cover;
+  background-color: black;
+}
+
+#img-caption {
+  font-family: "Lato", sans-serif;
+  background-color: rgba(10, 83, 3, 0.4);
+  font-size: 3.5vw;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  color: azure;
+  max-width: 18%;
+  max-height: 60%;
+  overflow: clip;
+  padding: 2%;
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(19, 133, 4, 0.8);
+  text-align: center;
+  height: 80vh;
+}
+
+#title h1 {
+  font-family: "Fjalla One", sans-serif;
+  vertical-align: middle;
+  font-size: 500%;
+  margin: 5%;
+}
+
+#title q {
+  font-size: 180%;
+  color: #fff;
+}
+
+#tribute-info {
+  text-indent: 3%;
+  background: black;
+  color: white;
+  text-align: justify;
+  font-family: "Lato", sans-serif;
+  font-size: 2vw;
+  padding: 2%;
+  min-height: 20vh;
+}
+
+#tribute-info::first-letter {
+  font-size: 150%;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* unvisited link */
+#tribute-link:link,
+a:link {
+  color: red;
+}
+
+/* visited link */
+#tribute-link:visited,
+a:visited {
+  color: red;
+}
+
+/* mouse over link */
+#tribute-link:hover,
+a:hover {
+  color: rgb(3, 160, 68);
+  font-weight: bolder;
+  /* text-decoration: underline; */
+}
+
+/* selected link */
+#tribute-link:active,
+a:active {
+  color: red;
+}
+
+article {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 105vh;
+}
+#article1 {
+  background-image: url(images/ti8.jpg);
+}
+
+#article2 {
+  background-image: url(images/ti9.png);
+}
+
+.articleContainer {
+  max-height: 90%;
+  width: 40vw;
+  border-radius: 3px;
+  box-shadow: 5px 10px #888888d0;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2%;
+  margin: 3%;
+}
+
+p,
+h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.8vw;
+  text-align: justify;
+}
+
+p::first-line {
+  text-indent: 3%;
+}
+
+footer {
+  color: #fff;
+  text-align: center;
+  font-family: sans-serif;
+  margin: 2% 0;
+}

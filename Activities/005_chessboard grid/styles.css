@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
+/* font-family: 'Lato', sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
+/* font-family: "Fjalla One", sans-serif; */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr auto 0.1fr;
+  grid-gap: 1vmin;
+  background-color: rgb(63, 63, 63);
+}
+
+header {
+  /* background-color: rgb(27, 114, 114); */
+}
+
+header h1 {
+  display: block;
+  font-family: "Fjalla One", sans-serif;
+  margin: 1vmin auto 0 auto;
+  text-align: center;
+  /* font-size: clamp(2vmin, 5vmin, 6vmin); */
+  font-size: 3.8vmin;
+  color: rgb(255, 209, 83);
+  text-shadow: 5px 5px 8px #747272;
+  font-style: italic;
+}
+
+header h1 span {
+  /* font-size: clamp(1.5em, 2em, 1.5em); */
+  font-size: 2em;
+  font-style: normal;
+  color: #fff;
+  text-shadow: 5px 5px 8px #a15c01;
+}
+
+footer {
+  display: block;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1vmin;
+  font-family: sans-serif;
+  font-size: 1.5vmin;
+}
+
+footer hr {
+  width: 20vmin;
+}
+
+/*******************************/
+/* CHESSBOARD PROPERTIES START */
+/*******************************/
+#boardContainer {
+  /* background-color: lightpink; */
+  justify-self: center;
+  align-self: center;
+}
+
+.mainBoard {
+  width: 80vmin;
+  height: 80vmin;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: rgb(255, 181, 121);
+  padding: 2.5vmin;
+  border: 0.5vmin solid rgb(131, 93, 62);
+  border-radius: 2vmin;
+}
+
+.tiles {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  font-size: 6vmin;
+  -webkit-text-fill-color: rgb(0, 0, 0);
+  -webkit-text-stroke-width: 0.2vmin;
+  -webkit-text-stroke-color: rgb(128, 82, 82);
+  text-shadow: 0.3vmin 0.3vmin rgb(0, 0, 0);
+  /* text-shadow: 0.5vmin 0.5vmin #4b4b4b; */
+}
+
+.tiles * {
+  position: absolute;
+  font-size: 8.5vmin;
+}
+
+.tiles:nth-child(n + 1):nth-child(even):nth-child(-n + 8),
+.tiles:nth-child(n + 17):nth-child(even):nth-child(-n + 24),
+.tiles:nth-child(n + 33):nth-child(even):nth-child(-n + 40),
+.tiles:nth-child(n + 49):nth-child(even):nth-child(-n + 56) {
+  background-color: rgb(6, 139, 57);
+}
+.tiles:nth-child(n + 9):nth-child(odd):nth-child(-n + 16),
+.tiles:nth-child(n + 25):nth-child(odd):nth-child(-n + 32),
+.tiles:nth-child(n + 41):nth-child(odd):nth-child(-n + 48),
+.tiles:nth-child(n + 57):nth-child(odd):nth-child(-n + 64) {
+  background-color: rgb(6, 139, 57);
+}
+
+.tiles span {
+  color: #000;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.2vmin;
+  -webkit-text-stroke-color: rgb(175, 175, 175);
+  text-shadow: 0.5vmin 0.5vmin #000;
+}
+/*****************************/
+/* CHESSBOARD PROPERTIES END */
+/*****************************/

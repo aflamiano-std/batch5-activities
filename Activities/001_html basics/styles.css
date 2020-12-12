@@ -1,0 +1,58 @@
+/* Master styles */
+body {
+  /* background-color: #c91717; */
+  padding: 20px 0px;
+  background-image: url("images/dark-honeycomb.png");
+}
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.mainHeader {
+  float: left;
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: justify;
+  text-justify: inter-word;
+  background-image: url("images/funky-lines.png");
+  width: 65%;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+
+.mainHeader h1 {
+  font-family: "Gloria Hallelujah", cursive;
+}
+
+h1 span {
+  float: right;
+}
+
+a {
+  text-decoration: none;
+  color: #4956c7;
+  /* border-bottom: 1px solid transparent; */
+}
+
+a:hover {
+  transition: color 0.5s;
+  color: #595a5e;
+  text-decoration: underline;
+}
+
+.description {
+  font-family: "Lato", sans-serif;
+  font-size: 20px;
+  color: #4956c7;
+  width: 65%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #4956c7;
+  line-height: 1.6;
+}
