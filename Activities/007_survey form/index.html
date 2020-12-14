@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Condominium rental form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="flex">
+      <h1 id="title">Condos for Rent</h1>
+      <div id="description">
+        Fill up this form to search our available condo units to your needs:
+      </div>
+      <form id="form" action="" method="get">
+        <label for="name" id="name-label"> Name: </label>
+        <input type="text" id="name" name="name" placeholder="Name" required />
+        <label for="email" id="email-label"> Email: </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email-address"
+          required
+        />
+        <label for="number" id="number-label"> Contact no: </label>
+        <input
+          type="number"
+          id="number"
+          name="number"
+          placeholder="Contact number"
+          required
+        />
+        <label for="furnish" id="furnish-label"> Furnishings: </label>
+        <select name="dlist" id="furnish">
+          <option value="fully-furnished">Fully furnished</option>
+          <option value="semi-furnished">Semi-furnished</option>
+          <option value="unfurnished">Unfurnished</option>
+        </select>
+
+        <div class="prices">
+          <span>Price range:</span>
+          <label for="10-20"
+            ><input
+              type="radio"
+              id="10-20"
+              name="price-range"
+              value="10-20"
+              required
+            />
+            10,000 - 20,000</label
+          >
+
+          <label for="20-30"
+            ><input type="radio" id="20-30" name="price-range" value="20-30" />
+            20,000 - 20,000</label
+          >
+
+          <label for="30-40"
+            ><input type="radio" id="30-40" name="price-range" value="30-40" />
+            30,000 - 40,000</label
+          >
+
+          <label for="40-50"
+            ><input type="radio" id="40-50" name="price-range" value="40-50" />
+            40,000 - 50,000</label
+          >
+
+          <label for="50-100"
+            ><input
+              type="radio"
+              id="50-100"
+              name="price-range"
+              value="50-100"
+            />
+            50,000 - 100,000</label
+          >
+        </div>
+
+        <div class="amenities">
+          <span>Amenities:</span>
+          <label for="swimming-pool">
+            <input
+              type="checkbox"
+              id="swimming-pool"
+              name="amenities"
+              value="swimming-pool"
+            />
+            Swimming Pool</label
+          >
+
+          <label for="gym"
+            ><input type="checkbox" id="gym" name="amenities" value="gym" />
+            Gym</label
+          >
+
+          <label for="playground"
+            ><input
+              type="checkbox"
+              id="playground"
+              name="amenities"
+              value="playground"
+            />
+            Playground</label
+          >
+        </div>
+        <input type="submit" id="submit" />
+      </form>
+      <footer>
+        Form Page
+        <hr />
+        © Aero Flamiano
+      </footer>
+    </div>
+  </body>
+</html>

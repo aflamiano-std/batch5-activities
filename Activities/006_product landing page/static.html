@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #000;
+      }
+      .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        color: #fff;
+      }
+      p {
+        font-size: 6rem;
+        border: 5px dashed rgb(255, 255, 255);
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex">
+      <h1>Email parameter value:</h1>
+      <p id="displayValue"></p>
+    </div>
+  </body>
+  <script>
+    let searchParams = new URLSearchParams(location.search);
+    console.log(searchParams.get("email"));
+    document.getElementById("displayValue").innerHTML = searchParams.get(
+      "email"
+    );
+  </script>
+</html>
