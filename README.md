@@ -8,3 +8,5 @@ Here are the projects completed throughout the Avion 24-week Software Engineerin
 - [x] 003 - [Tribute Page](https://aflamiano-std.github.io/batch5-activities/Activities/003_tribute%20page/)
 - [x] 004 - [Chessboard using Flex](https://aflamiano-std.github.io/batch5-activities/Activities/004_chessboard%20flex/)
 - [x] 005 - [Chessboard using Grid](https://aflamiano-std.github.io/batch5-activities/Activities/005_chessboard%20grid/)
+- [x] 006 - [Product Landing Page](https://aflamiano-std.github.io/batch5-activities/Activities/006_product%20landing%20page/)
+- [x] 007 - [Survey Form](https://aflamiano-std.github.io/batch5-activities/Activities/007_survey%20form/)
