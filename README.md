@@ -11,4 +11,5 @@ Here are the projects completed throughout the Avion 24-week Software Engineerin
 - [x] 006 - [Product Landing Page](https://aflamiano-std.github.io/batch5-activities/Activities/006_product%20landing%20page/)
 - [x] 007 - [Survey Form](https://aflamiano-std.github.io/batch5-activities/Activities/007_survey%20form/)
 - [x] 008 - [JS calculator](https://aflamiano-std.github.io/batch5-activities/Activities/008_js%20calculator/)
-- [x] 009 - [JS coding challenge](https://jsfiddle.net/g30wjv27/)
+- [x] 009 - [JS coding challenge - BMI Calculator](https://jsfiddle.net/g30wjv27/)
+- [x] 010 - [Js coding challenge - Playing Cards](https://jsfiddle.net/x01sb6vz/3/)
