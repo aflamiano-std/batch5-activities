@@ -13,3 +13,4 @@ Here are the projects completed throughout the Avion 24-week Software Engineerin
 - [x] 008 - [JS calculator](https://aflamiano-std.github.io/batch5-activities/Activities/008_js%20calculator/)
 - [x] 009 - [JS coding challenge - BMI Calculator](https://jsfiddle.net/g30wjv27/)
 - [x] 010 - [Js coding challenge - Playing Cards](https://jsfiddle.net/x01sb6vz/3/)
+- [x] 011 - [Js coding challenge - Playing Cards Dealer](https://aflamiano-std.github.io/batch5-activities/Activities/011_playing%20cards%20dealer/)
