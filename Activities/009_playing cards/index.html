@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Cards Dealer</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1 id="showCard">Card goes here</h1>
+    <p>
+        <label for="cardCount">Number of Cards: </label>
+        <span id="cardCount">Card count goes here | </span>
+        <span id="cardList">List goes here</span>
+    </p>
+    <label for="cardHistory">Card History: </label>
+    <p id="cardHistory">History goes here</p>
+    
+    <p>
+        <button type="button" id="prevHistory" onclick="previousCard()">Prev</button>
+        <button type="button" id="nextHistory" onclick="nextCard()">Next</button>
+    </p>
+    <p>
+        <button type="button" id="dealBtn" onclick="dealCard()">Deal Card</button>
+        <button type="button" id="shuffleBtn" onclick="shuffleDeck()">Shuffle Deck</button>
+    </p>
+</body>
+</html>
