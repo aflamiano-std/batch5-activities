@@ -25,7 +25,7 @@ function main() {
 
 function populate() {
     let suit = ['♠','♡','♢','♣'];
-    let cardNum = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+    let cardNum = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
     for(const face of suit) {
         for(const num of cardNum) {
             deck.push(face + num);
@@ -57,7 +57,7 @@ function previousCard() {
     } else {
         nextHistory.disabled = false;
     }
-    showCard.innerHTML = history[historyIndex - 1];
+    showCard.innerHTML = displayCardName(history[historyIndex - 1]);
 }
 
 function nextCard() {
@@ -71,7 +71,7 @@ function nextCard() {
     } else {
         prevHistory.disabled = false;
     }
-    showCard.innerHTML = history[historyIndex - 1];
+    showCard.innerHTML = displayCardName(history[historyIndex - 1]);
 }
 
 function dealCard() {
@@ -80,7 +80,7 @@ function dealCard() {
     // let goToHistory = deck.splice(cardIndex, 1);
     cardIndex = cardCnt;
     let goToHistory = deck.shift();
-    showCard.innerHTML = goToHistory;
+    showCard.innerHTML = displayCardName(goToHistory);
     // console.log(goToHistory);
     history.push(goToHistory);
     displayDeck();
@@ -113,3 +113,65 @@ function shuffleDeck() {
     displayCount();
 }
 
+function displayCardName(cardToName) {
+    let displayName;
+    switch(cardToName.charAt(1)) {
+        case 'A':
+            displayName = 'Ace of ';
+            break;
+        case '2':
+            displayName = 'Two of ';
+            break;
+        case '3':
+            displayName = 'Three of ';
+            break;
+        case '4':
+            displayName = 'Four of ';
+            break;
+        case '5':
+            displayName = 'Five of ';
+            break;
+        case '6':
+            displayName = 'Six of ';
+            break;
+        case '7':
+            displayName = 'Seven of ';
+            break;
+        case '8':
+            displayName = 'Eight of ';
+            break;
+        case '9':
+            displayName = 'Nine of ';
+            break;
+        case '1':
+            displayName = 'Ten of ';
+            break;
+        case 'J':
+            displayName = 'Jack of ';
+            break;
+        case 'Q':
+            displayName = 'Queen of ';
+            break;
+        case 'K':
+            displayName = 'King of ';
+            break;
+        default:
+            displayName = cardToName.charAt(1) + ' of ';
+            break;
+    }
+    switch(cardToName.charAt(0)) {
+        case '♠':
+            displayName += 'Spades'
+        break;
+        case '♡':
+            displayName += 'Hearts'
+        break;
+        case '♢':
+            displayName += 'Diamonds'
+        break;
+        case '♣':
+            displayName += 'Clubs'
+        break;
+    }
+    return displayName;
+}
