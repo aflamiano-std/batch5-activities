@@ -15,3 +15,4 @@ Here are the projects completed throughout the Avion 24-week Software Engineerin
 - [x] 010 - [Js coding challenge - Playing Cards](https://jsfiddle.net/x01sb6vz/3/)
 - [x] 011 - [Js coding challenge - Playing Cards Dealer](https://aflamiano-std.github.io/batch5-activities/Activities/011_playing%20cards%20dealer/)
 - [x] 012 - [Js coding challenge - Quiz](https://aflamiano-std.github.io/batch5-activities/Activities/012_quiz/)
+- [x] 013 - [Collaboration (w/ Harry Bolingot) - Pig Game](https://aflamiano-std.github.io/batch5-activities/Activities/013_pig%20game/)
