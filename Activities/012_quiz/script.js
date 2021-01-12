@@ -30,8 +30,11 @@ let Question = (function() {
     };
 })();
 
-generateQuestion();
-// console.log(Question.q1()[1]);
+let add = (function () {
+    var counter = 0;
+    return function () {counter += 1; return counter}
+})();
+
 function generateQuestion() {
     console.clear();
     let randomize = 'q' + (Math.floor(Math.random() * (1 + 5 - 1)) + 1);
@@ -42,21 +45,26 @@ function generateQuestion() {
         console.log(picks);
     }
     let answer = prompt("Please enter your answer");
-    checkAnswer(selected[2], parseInt(answer));
+    checkAnswer(selected[2], answer);
 }
 
 function checkAnswer(correctAnswer, answer) {
-    // console.log(typeof(correctAnswer));
-    // console.log(typeof(answer));
-    // console.log("this is the CORRECT ANSWER: " + correctAnswer);
-    // console.log("this is YOUR ANSWER: " + answer);
-    if ((answer != null) && (answer > 0) && (answer < 4)) {
-        if(answer === correctAnswer) {
+    let parsed = parseInt(answer);
+    if (answer == 'exit') {
+        return;
+    } else if ((parsed != null) && (parsed > 0) && (parsed < 4)) {
+        if( parsed === correctAnswer) {
             alert("You are CORRECT!");
+            if(add() % 5 === 0 ) {
+                alert("5 in a row!");
+            } else {
+                //DO NOTHING
+            }
         } else {
             alert("Please review your life choices.");
         }
     } else {
         alert("Invalid Input");
     }
+    generateQuestion();
 }
