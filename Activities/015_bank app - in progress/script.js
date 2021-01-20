@@ -52,6 +52,7 @@ class UI {
     }
 
     static deleteUser(element) {
+        console.log(element.parentElement.parentElement);
         element.parentElement.parentElement.remove();
     }
 
@@ -273,6 +274,7 @@ document.querySelector('#user-list').addEventListener('click', (e) => {
     let uid = e.target.parentElement.parentElement.firstElementChild.textContent;
     // Remove user from UI and localStorage
     if(e.target.classList.contains('delete')) {
+        UI.deleteUser(e.target);
         Store.removeUser(uid);
     } else if(e.target.classList.contains('withdraw')) { // Display withdraw form and getId from table row
         UI.displayForm('withdraw');
