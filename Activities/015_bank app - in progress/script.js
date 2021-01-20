@@ -1,3 +1,11 @@
+const userForm = document.querySelector('#user-form');
+const withdrawForm = document.querySelector('#withdraw-form');
+const depositForm = document.querySelector('#deposit-form');
+
+const wuidText = document.querySelector('#withdrawUidText');
+const duidText = document.querySelector('#depositUidText');
+let id = null;
+
 // User Class: User skeleton
 class User {
     constructor(uid, username, password, firstName, lastName, accountType) {
@@ -7,19 +15,11 @@ class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accountType = accountType;
-        this.balance = 1.1;
-    }
-
-    setBalance(amount) {
-        this.balance = amount;
-    }
-
-    getBalance() {
-        return this.balance;
+        this.balance = 0.0;
     }
 }
 
-// UI Class: Handles UI
+// UI Class: Handles UI items
 class UI {
     static list_users() {
         const users = Store.getUsers();
@@ -45,8 +45,35 @@ class UI {
         list.appendChild(row);
     }
 
+    static refreshList() {
+        const list = document.querySelector('#user-list');
+        list.innerHTML = '';
+        UI.list_users();
+    }
+
     static deleteUser(element) {
         element.parentElement.parentElement.remove();
+    }
+
+    static displayForm(form) {
+        switch (form) {
+            case 'withdraw':
+                userForm.classList.add('d-none');
+                depositForm.classList.add('d-none');
+                withdrawForm.classList.remove('d-none');
+                break;
+            case 'deposit':
+                userForm.classList.add('d-none');
+                depositForm.classList.remove('d-none');
+                withdrawForm.classList.add('d-none');
+                break;
+            case 'addUser':
+                userForm.classList.remove('d-none');
+                depositForm.classList.add('d-none');
+                withdrawForm.classList.add('d-none');
+                break;
+        }
+        
     }
 
     static clearFields() {
@@ -55,6 +82,9 @@ class UI {
         document.querySelector('#firstName').value = '',
         document.querySelector('#lastName').value = '',
         document.querySelector('[value="sa"]').checked = true;
+
+        document.querySelector('#withdrawAmount').value = '';
+        document.querySelector('#depositAmount').value = '';
     }
 }
 
@@ -66,17 +96,20 @@ class Account {
 
     static create_user(user, balance) {
         const usr = new User(Account.generateUID(), user.username, user.password, user.firstName, user.lastName, user.accountType);
+        usr.balance = balance;
         UI.addUserToList(usr);
         Store.addUser(usr);
         console.log(Store.getUsers());
     }
     
     static deposit(user, amount) {
-    
+        user.balance += parseFloat(amount);
+        Store.updateUser(user);
     }
     
     static withdraw(user, amount) {
-    
+        user.balance -= parseFloat(amount);
+        Store.updateUser(user);
     }
     
     static send(from_user, to_user, amount) {
@@ -100,16 +133,48 @@ class Store {
         return users;
     }
 
+    static getStoredId(uid) {
+        function stored() {
+            return uid;
+        }
+        return stored;
+    }
+
+    static getUser(uid) {
+        const users = Store.getUsers();
+        let retrievedUser;
+        users.forEach((user, index) => {
+            if(user.uid === uid) {
+                retrievedUser = user;
+            } else {
+                //DO NOTHING
+            }
+        });
+        return retrievedUser;
+    }
+
     static addUser(user) {
         const users = Store.getUsers();
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
     }
 
-    static removeUser(id) {
+    static updateUser(update) {
         const users = Store.getUsers();
         users.forEach((user, index) => {
-            if(user.uid === id) {
+            if(user.uid === update.uid) {
+                users.splice(index, 1, update);
+            } else {
+                //DO NOTHING
+            }
+        });
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    static removeUser(uid) {
+        const users = Store.getUsers();
+        users.forEach((user, index) => {
+            if(user.uid === uid) {
                 users.splice(index, 1);
             } else {
                 //DO NOTHING
@@ -162,22 +227,62 @@ document.querySelector('#user-form').addEventListener('submit', (e) => {
         lastName : document.querySelector('#lastName').value.toUpperCase(),
         accountType : document.querySelector('[name="customRadio"]:checked').value.toUpperCase()
     }
+    let balance = 0;
+    if (userFormValues.accountType === 'SA') {
+        balance = 2000;
+    } else if (userFormValues.accountType === 'CA') {
+        balance = 10000;
+    } else {
+        // DO NOTHING
+    }
 
-    Account.create_user(userFormValues);
+    Account.create_user(userFormValues, balance);
     UI.clearFields();
 });
 
-// Event: Remove a User
+document.querySelector('#withdraw-form').addEventListener('submit', (e) => {
+    // Prevent actual submit
+    e.preventDefault();
+
+    // Get form values
+    console.log(document.querySelector('#withdrawAmount').value)
+    let amount = document.querySelector('#withdrawAmount').value;
+    console.log(id());
+    console.log(Store.getUser(id()));
+    Account.withdraw(Store.getUser(id()), amount);
+    UI.refreshList();
+    UI.clearFields();
+});
+
+document.querySelector('#deposit-form').addEventListener('submit', (e) => {
+    // Prevent actual submit
+    e.preventDefault();
+
+    // Get form values
+    console.log(document.querySelector('#depositAmount').value)
+    let amount = document.querySelector('#depositAmount').value;
+    console.log(id());
+    console.log(Store.getUser(id()));
+    Account.deposit(Store.getUser(id()), amount);
+    UI.refreshList();
+    UI.clearFields();
+});
+
+// Event: User Options [Delete, Withdraw, Deposit]
 document.querySelector('#user-list').addEventListener('click', (e) => {
-    // Remove user from UI
+    let uid = e.target.parentElement.parentElement.firstElementChild.textContent;
+    // Remove user from UI and localStorage
     if(e.target.classList.contains('delete')) {
-        UI.deleteUser(e.target); 
-        // Remove user from store
-        // console.log(e.target.parentElement.parentElement.firstElementChild.textContent);
-        Store.removeUser(e.target.parentElement.parentElement.firstElementChild.textContent);
-    } else if(e.target.classList.contains('withdraw')) {
+        Store.removeUser(uid);
+    } else if(e.target.classList.contains('withdraw')) { // Display withdraw form and getId from table row
+        UI.displayForm('withdraw');
+        wuidText.innerText = uid;
+        id = Store.getStoredId(uid);
         console.log('WITHDRAW');
-    } else if(e.target.classList.contains('deposit')) {
+    } else if(e.target.classList.contains('deposit')) { // Display deposit form and getId from table row
+        UI.displayForm('deposit');
+        duidText.innerText = uid;
+        id = Store.getStoredId(uid);
         console.log('DEPOSIT');
     } else {
         //DO NOTHING

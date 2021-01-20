@@ -12,6 +12,7 @@
     <div class="container mt-4">
         <h1 class="display-4 text-center">
             <i class="fas fa-comments-dollar text-primary"></i> My<span class="text-primary">Banking</span>App</h1>
+            <!-- CREATE USER FORM START -->
             <form id="user-form">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -42,6 +43,29 @@
             </fieldset>
             <input type="submit" value="Add User" class="btn btn-primary btn-block">
           </form>
+          <!-- CREATE USER FORM END -->
+          <!-- WITHDRAWAL FORM START -->
+          <form id="withdraw-form" class="d-none">
+            <p>User with UID: <span id="withdrawUidText">#</span></p>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" id="withdrawAmount" class="form-control">
+            </div>
+            <input type="submit" value="Withdraw" class="btn btn-primary btn-block">
+            <a href="index.html" class="btn btn-secondary btn-block"> Cancel </a>
+          </form>
+          <!-- WITHDRAWAL FORM END -->
+          <form id="deposit-form" class="d-none">
+            <p>User with UID: <span id="depositUidText">#</span></p>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" id="depositAmount" class="form-control">
+            </div>
+            <input type="submit" value="Deposit" class="btn btn-primary btn-block">
+            <a href="index.html" class="btn btn-secondary btn-block"> Cancel </a>
+          </form>
+          <!-- WITHDRAWAL FORM END -->
+          
           <table class="table table-striped mt-5">
             <thead>
               <tr>
