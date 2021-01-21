@@ -3,84 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking App</title>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <title>Banking App v2</title>
+    <script src="./src/main.js" defer></script>
 </head>
-<body>
-    <div class="container mt-4">
-        <h1 class="display-4 text-center">
-            <i class="fas fa-comments-dollar text-primary"></i> My<span class="text-primary">Banking</span>App</h1>
-            <!-- CREATE USER FORM START -->
-            <form id="user-form">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" class="form-control">
-            </div>
-            <fieldset class="form-group">
-                <div class="form-group">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio1" name="customRadio" value="sa" class="custom-control-input" checked="">
-                      <label class="custom-control-label" for="customRadio1">Savings</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio2" name="customRadio" value="ca" class="custom-control-input">
-                      <label class="custom-control-label" for="customRadio2">Checking</label>
-                    </div>
-            </fieldset>
-            <input type="submit" value="Add User" class="btn btn-primary btn-block">
-          </form>
-          <!-- CREATE USER FORM END -->
-          <!-- WITHDRAWAL FORM START -->
-          <form id="withdraw-form" class="d-none">
-            <p>User with UID: <span id="withdrawUidText">#</span></p>
-            <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="text" id="withdrawAmount" class="form-control">
-            </div>
-            <input type="submit" value="Withdraw" class="btn btn-primary btn-block">
-            <a href="index.html" class="btn btn-secondary btn-block"> Cancel </a>
-          </form>
-          <!-- WITHDRAWAL FORM END -->
-          <form id="deposit-form" class="d-none">
-            <p>User with UID: <span id="depositUidText">#</span></p>
-            <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="text" id="depositAmount" class="form-control">
-            </div>
-            <input type="submit" value="Deposit" class="btn btn-primary btn-block">
-            <a href="index.html" class="btn btn-secondary btn-block"> Cancel </a>
-          </form>
-          <!-- WITHDRAWAL FORM END -->
-          
-          <table class="table table-striped mt-5">
-            <thead>
-              <tr>
-                <th>UID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Account Type</th>
-                <th>Balance</th>
-                <th colspan="3">Options</th>
-                <!-- <th></th>
-                <th></th> -->
-              </tr>
-            </thead>
-            <tbody id="user-list"></tbody>
-          </table>
-      </div>    
+<body onload="Store.releaseStoredId()">
+    <a href="./pages/create_user.html">Create User</a>
+    <a id="listUsers" href="./pages/list_users.html">List Users</a>
 </body>
 </html>
