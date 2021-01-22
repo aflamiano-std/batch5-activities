@@ -9,9 +9,10 @@ document.querySelector("#withdraw-form").addEventListener("submit", (e) => {
   const formData = {
     amount: parseFloat(document.querySelector("#amount").value),
   };
-
-  console.log(formData.amount);
-  Account.withdraw(user, formData.amount);
+  // console.log(formData.amount);
+  if (Validation.checkSufficientFunds(user, formData.amount)) {
+    Account.withdraw(user, formData.amount);
+    document.querySelector("#withdraw-form").reset();
+  }
   UI.listUserDetails(user);
-  document.querySelector("#withdraw-form").reset();
 });

@@ -1,8 +1,10 @@
 // User Class: Represents a User
 class User {
-  constructor(uid, accn, fname, lname, email, accType) {
+  constructor(uid, accn, user, pass, fname, lname, email, accType) {
     this.id = uid;
     this.accountNumber = accn;
+    this.username = user;
+    this.password = pass;
     this.firstName = fname;
     this.lastName = lname;
     this.email = email;
@@ -94,6 +96,17 @@ class Store {
   static releaseStoredId() {
     localStorage.setItem("GUID", null);
   }
+
+  static getNextAccnNumber() {
+    let accn = 0;
+    if (localStorage.getItem("accnCurrent") === null) {
+      accn = Store.getUsers().length + 1;
+    } else {
+      accn = JSON.parse(localStorage.getItem("accnCurrent")) + 1;
+    }
+    localStorage.setItem("accnCurrent", accn);
+    return accn;
+  }
 }
 
 // Account Class: Handles account related functions
@@ -102,6 +115,8 @@ class Account {
     const user = new User(
       formData.id,
       formData.accountNumber,
+      formData.username,
+      formData.password,
       formData.firstName,
       formData.lastName,
       formData.email,
@@ -109,30 +124,32 @@ class Account {
     );
     user.setBalance(balance);
 
-    console.log(user);
+    // console.log(user);
     Store.addUser(user);
   }
 
   static deposit(user, amount) {
     let currentBalance = Account.get_balance(user);
-    console.log(currentBalance);
-    user.balance = currentBalance + amount;
-    console.log(user.balance);
+    let total = parseFloat(currentBalance) + amount;
+    // console.log(currentBalance);
+    user.balance = parseFloat(total).toFixed(2);
+    // console.log(user.balance);
     Store.updateUser(user);
   }
 
   static withdraw(user, amount) {
     let currentBalance = Account.get_balance(user);
-    console.log(currentBalance);
-    user.balance = currentBalance - amount;
-    console.log(user.balance);
+    let total = parseFloat(currentBalance) - amount;
+    // console.log(currentBalance);
+    user.balance = parseFloat(total).toFixed(2);
+    // console.log(user.balance);
     Store.updateUser(user);
   }
 
   static send(from_user, to_user, amount) {
-    console.log(from_user);
-    console.log(to_user);
-    console.log(amount);
+    // console.log(from_user);
+    // console.log(to_user);
+    // console.log(amount);
     Account.withdraw(from_user, amount);
     Account.deposit(to_user, amount);
   }
@@ -187,4 +204,73 @@ class UI {
   }
 }
 
+class Validation {
+  static checkCreateUserForm(formData) {
+    // formData.id,
+    // formData.accountNumber,
+    // formData.username,
+    // formData.password,
+    // formData.firstName,
+    // formData.lastName,
+    // formData.email,
+    // formData.accountType
+    let regex = /^[0-9]+$/;
+    let status = true;
+    if (formData.username.charAt(0).match(regex)) {
+      alert("Username MUST start with a string");
+      status = false;
+    }
+    if (formData.firstName.charAt(0).match(regex)) {
+      alert("First Name MUST start with a string");
+      status = false;
+    }
+    if (formData.lastName.charAt(0).match(regex)) {
+      alert("Last Name MUST start with a string");
+      status = false;
+    }
+    return status;
+  }
+
+  static checkIfUserExists(username) {
+    let users = Store.getUsers();
+    let status = true;
+    users.forEach((user, index) => {
+      if (user.username === username) {
+        alert("User already exists");
+        status = false;
+      } else {
+        // DO NOTHING
+      }
+    });
+    return status;
+  }
+
+  static checkIfAccountExists(user, accn) {
+    let users = Store.getUsers();
+    let status = false;
+    if (user.accountNumber === accn) {
+      alert("You cannot send to your own account");
+      status = false;
+    } else {
+      users.forEach((user, index) => {
+        if (user.accountNumber === accn) {
+          status = true;
+        }
+      });
+      if (status === false) {
+        alert("Account does not exist");
+      }
+    }
+    return status;
+  }
+
+  static checkSufficientFunds(user, amount) {
+    if (user.balance < amount) {
+      alert("Insufficient Balance");
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
 // document.addEventListener("DOMContentLoaded", Store.releaseStoredId());

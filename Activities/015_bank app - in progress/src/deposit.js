@@ -10,7 +10,7 @@ document.querySelector("#deposit-form").addEventListener("submit", (e) => {
     amount: parseFloat(document.querySelector("#amount").value),
   };
 
-  console.log(formData.amount);
+  // console.log(formData.amount);
   Account.deposit(user, formData.amount);
   UI.listUserDetails(user);
   document.querySelector("#deposit-form").reset();

@@ -11,11 +11,13 @@ document.querySelector("#send-form").addEventListener("submit", (e) => {
     amount: parseFloat(document.querySelector("#amount").value),
   };
 
-  // console.log(formData.accn);
-  // console.log(formData.amount);
-  let toId = Store.getId(formData.accn);
-  let toUser = Store.getUser(toId);
-  Account.send(user, toUser, formData.amount);
+  console.log(formData.accn);
+  console.log(formData.amount);
+  if (Validation.checkIfAccountExists(user, formData.accn)) {
+    let toId = Store.getId(formData.accn);
+    let toUser = Store.getUser(toId);
+    Account.send(user, toUser, formData.amount);
+    document.querySelector("#send-form").reset();
+  }
   UI.listUserDetails(user);
-  document.querySelector("#send-form").reset();
 });

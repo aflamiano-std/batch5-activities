@@ -2,10 +2,12 @@
 document.querySelector("#createUser-form").addEventListener("submit", (e) => {
   // Prevent actual submit and reloading the page
   e.preventDefault();
-  let accnCount = Store.getUsers().length + 1;
+
   const formData = {
     id: Date.now() + Math.random().toString().slice(2),
-    accountNumber: `BNUSR${accnCount}`,
+    accountNumber: "dummyNumber",
+    username: document.querySelector("#username").value.toUpperCase(),
+    password: document.querySelector("#password").value.toUpperCase(),
     firstName: document.querySelector("#firstName").value.toUpperCase(),
     lastName: document.querySelector("#lastName").value.toUpperCase(),
     email: document.querySelector("#email").value.toUpperCase(),
@@ -16,16 +18,21 @@ document.querySelector("#createUser-form").addEventListener("submit", (e) => {
 
   let balance = 0.0;
   let additonalDeposit = document.querySelector("#addDeposit").value;
-  if (formData.accountType === "SA") {
-    balance = 2000.0;
-  } else if (formData.accountType === "CA") {
-    balance = 10000.0;
-  } else {
-    //DO NOTHING
+  if (
+    Validation.checkCreateUserForm(formData) &&
+    Validation.checkIfUserExists(formData.username)
+  ) {
+    formData.accountNumber = `BNUSR${Store.getNextAccnNumber()}`;
+    if (formData.accountType === "SA") {
+      balance = 2000.0;
+    } else if (formData.accountType === "CA") {
+      balance = 10000.0;
+    } else {
+      //DO NOTHING
+    }
+    balance = parseFloat(balance) + parseFloat(additonalDeposit) || 0;
+
+    Account.create_user(formData, balance.toFixed(2));
+    document.querySelector("#createUser-form").reset();
   }
-
-  balance += parseFloat(additonalDeposit) || 0;
-
-  Account.create_user(formData, balance);
-  document.querySelector("#createUser-form").reset();
 });
