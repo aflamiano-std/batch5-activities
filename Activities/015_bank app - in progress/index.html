@@ -9,5 +9,35 @@
 <body onload="Store.releaseStoredId()">
     <a href="./pages/create_user.html">Create User</a>
     <a id="listUsers" href="./pages/list_users.html">List Users</a>
+    <button id="load">Load localStorage</button>
 </body>
+<script>
+    document.querySelector('#load').addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let initialUsers = [{ 
+    id: '1611376423320887244497321791',
+    accountNumber : 'BNUSR1',
+    username : 'TOKYOTANAKA',
+    password : 'PASSWORD',
+    firstName : 'TOKYO',
+    lastName : 'TANAKA',
+    email : 'TOKYOTANAKA@EMAIL.COM',
+    accountType : 'CA',
+    balance : 15000.00,
+  }, {
+    id: '16113767227273616463362552902',
+    accountNumber : 'BNUSR2',
+    username : 'KAMIKAZEBOY',
+    password : 'PASSWORD',
+    firstName : 'KAMIKAZE',
+    lastName : 'BOY',
+    email : 'KAMIKAZEBOY@EMAIL.COM',
+    accountType : 'SA',
+    balance : 3000.00,
+  }]
+  localStorage.clear();
+  localStorage.setItem("users", JSON.stringify(initialUsers));
+    })
+</script>
 </html>

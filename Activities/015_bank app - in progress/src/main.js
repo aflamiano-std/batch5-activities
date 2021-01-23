@@ -201,7 +201,7 @@ class UI {
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>${user.accountType}</td>
-            <td>${user.balance}</td>
+            <td>${parseFloat(user.balance).toFixed(2)}</td>
             <td><a href="#" class="edit">Edit</a></td>
             <td><a href="#" class="withdraw">Withdraw</a></td>
             <td><a href="#" class="deposit">Deposit</a></td>
