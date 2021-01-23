@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking App v2 - Edit User</title>
+    <script src="../src/main.js" defer></script>
+    <script src="../src/edit_user.js" defer></script>
+<body>
+    <h3>Edit User Details</h3>
+    <ul id="accountDetails">
+
+    </ul>
+    <form id="editUser-form">
+        <section>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName">
+            <!-- minlength="2" maxlength="24" required -->
+        </section>
+        <section>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" >
+            <!-- minlength="2" maxlength="24" required -->
+        </section>
+        <section>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" > 
+            <!-- minlength="5" maxlength="32" required -->
+        </section>
+    <button type="submit">Edit User</button>
+    </form>
+    <a href="./list_users.html">Cancel</a>
+</body>
+</html>

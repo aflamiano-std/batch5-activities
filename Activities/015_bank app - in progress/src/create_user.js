@@ -17,10 +17,10 @@ document.querySelector("#createUser-form").addEventListener("submit", (e) => {
   };
 
   let balance = 0.0;
-  let additonalDeposit = document.querySelector("#addDeposit").value;
+  let additonalDeposit = document.querySelector("#addDeposit").value || 0;
   if (
     Validation.checkCreateUserForm(formData) &&
-    Validation.checkIfUserExists(formData.username)
+    Validation.checkIfUserDoesNotExist(formData.username)
   ) {
     formData.accountNumber = `BNUSR${Store.getNextAccnNumber()}`;
     if (formData.accountType === "SA") {
@@ -30,8 +30,8 @@ document.querySelector("#createUser-form").addEventListener("submit", (e) => {
     } else {
       //DO NOTHING
     }
-    balance = parseFloat(balance) + parseFloat(additonalDeposit) || 0;
-
+    balance = parseFloat(balance) + parseFloat(additonalDeposit);
+    // console.log(balance);
     Account.create_user(formData, balance.toFixed(2));
     document.querySelector("#createUser-form").reset();
   }

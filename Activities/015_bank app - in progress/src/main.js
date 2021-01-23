@@ -1,3 +1,9 @@
+// THREE UNIQUE FEATURES
+// 1. Account number increments even after account has been deleted to prevent
+//    future withdrawals or deposits to a different account when creating a new user
+// 2. Stored GUID will be deleted once page tab or window is closed
+// 3. Added edit function for the user to edit first name, last name, and email
+
 // User Class: Represents a User
 class User {
   constructor(uid, accn, user, pass, fname, lname, email, accType) {
@@ -18,6 +24,7 @@ class User {
 
 // Store Class: Handles storage of data
 class Store {
+  // Get an Array of users object from local storage
   static getUsers() {
     let users;
     if (localStorage.getItem("users") === null) {
@@ -28,6 +35,7 @@ class Store {
     return users;
   }
 
+  // Get only the id of a user using Account Number
   static getId(accn) {
     const users = Store.getUsers();
     let retrievedId;
@@ -41,6 +49,7 @@ class Store {
     return retrievedId;
   }
 
+  // Get a user object using its id
   static getUser(uid) {
     const users = Store.getUsers();
     let retrievedUser;
@@ -54,12 +63,14 @@ class Store {
     return retrievedUser;
   }
 
+  // Adds a user object to local storage
   static addUser(user) {
     const users = Store.getUsers();
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
   }
 
+  // Updates a user object on local storage
   static updateUser(update) {
     const users = Store.getUsers();
     users.forEach((user, index) => {
@@ -72,6 +83,7 @@ class Store {
     localStorage.setItem("users", JSON.stringify(users));
   }
 
+  // Deletes a user object from local storage using its id
   static removeUser(uid) {
     // console.log(`REMOVE USER INITIATED for ${uid}`);
     const users = Store.getUsers();
@@ -85,18 +97,22 @@ class Store {
     localStorage.setItem("users", JSON.stringify(users));
   }
 
+  // Stores id of a selected user to local storage to be accessed on any page
   static setStoreId(uid) {
     localStorage.setItem("GUID", uid);
   }
 
+  // Gets id of a selected user from local storage to be accessed on any page
   static getStoredId() {
     return localStorage.getItem("GUID");
   }
 
+  // Sets stored id to NULL
   static releaseStoredId() {
     localStorage.setItem("GUID", null);
   }
 
+  // Gets latest increment count of registered accounts even when they are deleted
   static getNextAccnNumber() {
     let accn = 0;
     if (localStorage.getItem("accnCurrent") === null) {
@@ -111,6 +127,7 @@ class Store {
 
 // Account Class: Handles account related functions
 class Account {
+  // Creates a User object from form data and stores it to local storage
   static create_user(formData, balance) {
     const user = new User(
       formData.id,
@@ -124,36 +141,41 @@ class Account {
     );
     user.setBalance(balance);
 
-    // console.log(user);
     Store.addUser(user);
   }
 
+  // Edits a user with form data and stores it to local storage
+  static edit_user(uid, formData) {
+    let user = Store.getUser(uid);
+    user.firstName = formData.firstName;
+    user.lastName = formData.lastName;
+    user.email = formData.email;
+    Store.updateUser(user);
+  }
+
+  // Retrieves current balance of a user and deposits specified amount and stores it to local storage
   static deposit(user, amount) {
     let currentBalance = Account.get_balance(user);
     let total = parseFloat(currentBalance) + amount;
-    // console.log(currentBalance);
     user.balance = parseFloat(total).toFixed(2);
-    // console.log(user.balance);
     Store.updateUser(user);
   }
 
+  // Retrieves current balance of a user and withdraws specified amount and stores it to local storage
   static withdraw(user, amount) {
     let currentBalance = Account.get_balance(user);
     let total = parseFloat(currentBalance) - amount;
-    // console.log(currentBalance);
     user.balance = parseFloat(total).toFixed(2);
-    // console.log(user.balance);
     Store.updateUser(user);
   }
 
+  // Performs withdraw function on sender and deposit function on receiver with a specified amount which stores them to local storage
   static send(from_user, to_user, amount) {
-    // console.log(from_user);
-    // console.log(to_user);
-    // console.log(amount);
     Account.withdraw(from_user, amount);
     Account.deposit(to_user, amount);
   }
 
+  // Retrieves only the balance of a user
   static get_balance(user) {
     return Store.getUser(user.id).balance;
   }
@@ -161,11 +183,13 @@ class Account {
 
 // UI Class: Handles UX related functions
 class UI {
+  // lists ALL users retrieved from local storage to the UI
   static list_users() {
     const users = Store.getUsers();
     users.forEach((user) => UI.addUserToList(user));
   }
 
+  // Adds user retrieved from local storage to the bottom of the list
   static addUserToList(user) {
     const list = document.querySelector("#user-list");
 
@@ -178,6 +202,7 @@ class UI {
             <td>${user.email}</td>
             <td>${user.accountType}</td>
             <td>${user.balance}</td>
+            <td><a href="#" class="edit">Edit</a></td>
             <td><a href="#" class="withdraw">Withdraw</a></td>
             <td><a href="#" class="deposit">Deposit</a></td>
             <td><a href="#" class="send">Send</a></td>
@@ -187,11 +212,12 @@ class UI {
     list.appendChild(row);
   }
 
+  // deletes selected user from the UI
   static deleteUser(element) {
-    // console.log(element.parentElement.parentElement);
     element.parentElement.parentElement.remove();
   }
 
+  // list the details of a user retrieved local storage
   static listUserDetails(user) {
     const details = document.querySelector("#accountDetails");
     details.innerHTML = `
@@ -202,9 +228,17 @@ class UI {
     <li>Current balance: ${user.balance}</li>
     `;
   }
+
+  // Adds values to input fields according to user being edited
+  static defaultUserDetails(user) {
+    document.querySelector("#firstName").value = user.firstName;
+    document.querySelector("#lastName").value = user.lastName;
+    document.querySelector("#email").value = user.email;
+  }
 }
 
 class Validation {
+  // Checks create user input fields for wrong arguments, returns true or false
   static checkCreateUserForm(formData) {
     // formData.id,
     // formData.accountNumber,
@@ -231,7 +265,26 @@ class Validation {
     return status;
   }
 
-  static checkIfUserExists(username) {
+  // Checks edit user input fields for wrong arguments, returns true or false
+  static checkEditUserForm(formData) {
+    // formData.firstName,
+    // formData.lastName,
+    // formData.email,
+    let regex = /^[0-9]+$/;
+    let status = true;
+    if (formData.firstName.charAt(0).match(regex)) {
+      alert("First Name MUST start with a string");
+      status = false;
+    }
+    if (formData.lastName.charAt(0).match(regex)) {
+      alert("Last Name MUST start with a string");
+      status = false;
+    }
+    return status;
+  }
+
+  // Checks if user with the same username exists in local storage, returns true or false
+  static checkIfUserDoesNotExist(username) {
     let users = Store.getUsers();
     let status = true;
     users.forEach((user, index) => {
@@ -245,6 +298,7 @@ class Validation {
     return status;
   }
 
+  // Checks if user with the same account number exists in local storage, returns true or false
   static checkIfAccountExists(user, accn) {
     let users = Store.getUsers();
     let status = false;
@@ -264,6 +318,7 @@ class Validation {
     return status;
   }
 
+  // Checks if user's balance has enough funds to make a transfer
   static checkSufficientFunds(user, amount) {
     if (user.balance < amount) {
       alert("Insufficient Balance");
@@ -273,4 +328,3 @@ class Validation {
     }
   }
 }
-// document.addEventListener("DOMContentLoaded", Store.releaseStoredId());

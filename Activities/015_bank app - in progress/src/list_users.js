@@ -9,8 +9,15 @@ document.querySelector("#user-list").addEventListener("click", (e) => {
   // Remove user from UI and localStorage
   if (e.target.classList.contains("delete")) {
     // console.log("DELETE");
-    UI.deleteUser(e.target);
-    Store.removeUser(uid);
+    if (confirm("Delete action cannot be reversed, press OK to continue")) {
+      UI.deleteUser(e.target);
+      Store.removeUser(uid);
+    } else {
+      // DO NOTHING
+    }
+  } else if (e.target.classList.contains("edit")) {
+    console.log("EDIT USER");
+    location.href = "../pages/user_edit.html";
   } else if (e.target.classList.contains("withdraw")) {
     console.log("WITHDRAW");
     location.href = "../pages/user_withdraw.html";

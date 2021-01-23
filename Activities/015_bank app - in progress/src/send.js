@@ -1,7 +1,12 @@
 let uid = Store.getStoredId();
 let user = Store.getUser(uid);
 
-UI.listUserDetails(user);
+if (user != null) {
+  UI.listUserDetails(user);
+} else {
+  alert("Session has expired");
+  location.href = "./list_users.html";
+}
 
 document.querySelector("#send-form").addEventListener("submit", (e) => {
   // Prevent actual submit and reloading the page
@@ -21,3 +26,9 @@ document.querySelector("#send-form").addEventListener("submit", (e) => {
   }
   UI.listUserDetails(user);
 });
+
+window.onunload = function () {
+  console.log("DELETING GUID");
+  localStorage.setItem("GUID", null);
+  return "";
+};
